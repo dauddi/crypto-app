@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { Layout, Typography, Space } from 'antd';
 import { Navbar, Homepage, Exchanges, Cryptocurrencies, CryptoDetails, News } from './components';
+import './App.css';
 
 const App = () => {
 	return (
@@ -33,10 +34,18 @@ const App = () => {
 						</Switch>
 					</div>
 				</Layout>
-			</div>
-
-			<div className="footer">
-								
+	
+				<div className="footer" style={{textAlign: 'center'}}>
+					<Typography.Title level={5} style={{color:'white'}}>
+						CryptoMango <br/>
+						All Right Reserverd
+					</Typography.Title>
+					<Space>
+						<Link to='/'>Home</Link>
+						<Link to='/exchanges'>Exchanges</Link>
+						<Link to='/news'>News</Link>
+					</Space>
+				</div>
 			</div>
 		</div>
 	)

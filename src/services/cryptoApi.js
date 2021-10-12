@@ -2,7 +2,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 const cryptoApiHeaders = {
 	'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
-    'x-rapidapi-key': 'f9671e5427msha190c003984e4ecp18b998jsn5e26888e144b'
+    'x-rapidapi-key': process.env.CRYPTO_API_KEY
 }
 
 const baseUrl = 'https://coinranking1.p.rapidapi.com'
@@ -14,9 +14,15 @@ export const cryptoApi = createApi({
 	baseQuery: fetchBaseQuery({ baseUrl }),
 	endpoints: (builder) => ({
 		getCryptos: builder.query({
-			query: (count) => createRequest(`/coins?limit=${count}`)
+			query: (count) => createRequest(`/coins?x-access-token=i-have-to-migrate-to-v2&limit=${count}`)
+		}),
+		getCryptoDetails: builder.query({
+			query: (coinId) => createRequest(`/coin/${coinId}?x-access-token=i-have-to-migrate-to-v2`)
+		}),
+		getCryptoHistory: builder.query({
+			query: ({ coinId, timePeriod }) => createRequest(`/coin/${coinId}/history/${timePeriod}?x-access-token=i-have-to-migrate-to-v2`)
 		})
 	})
 })
 
-export const { useGetCryptosQuery } = cryptoApi;
+export const { useGetCryptosQuery, useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } = cryptoApi;

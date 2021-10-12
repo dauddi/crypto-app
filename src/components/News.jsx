@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Select, Typography, Row, Col, Avatar, Card } from 'antd';
 import moment from 'moment';
-
+import Loader from './Loader'
 import { useGetNewsQuery } from '../services/newsApi';
 import { useGetCryptosQuery } from '../services/cryptoApi';
 
@@ -13,7 +13,7 @@ const News = ({ simplified }) => {
 	const { data: newsList, isFetching} = useGetNewsQuery({keyword, count: simplified ? 6 : 24});
 	const {data: cryptoList } = useGetCryptosQuery(100);
 	
-	if (isFetching) return "Loading...";
+	if (isFetching) return <Loader />;
 
 	const demoImage = "https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News";
 
